@@ -1,0 +1,9 @@
+%MainWebbasicStructureStyle {
+    display: flex;
+    flex-flow: column;
+    
+    & > * {
+        width: clamp(320px, 90%, 1200px);
+        margin: 0 auto;
+    } 
+}

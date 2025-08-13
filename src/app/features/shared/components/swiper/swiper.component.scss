@@ -1,0 +1,15 @@
+@import "partial-styles/variables";
+:host{
+    position: relative;
+
+    swiper-container{
+        position: absolute;
+        inset: 0;
+        
+        @media (max-width: 500px) {
+            swiper-slide{
+                padding: 0 $medium_number;
+            }
+        }
+    }
+}

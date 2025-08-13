@@ -1,0 +1,37 @@
+@import "partial-styles/variables";
+@import "partial-styles/placeholders";
+
+:host{
+    @extend %MainWebbasicStructureStyle;
+    gap: $large_number;
+    padding-bottom: $large_number * 2;
+
+    header {
+        display: flex;
+        flex-flow: column;
+        gap: $medium_number + $small_number;
+
+        h1{
+            text-align: center;
+        }
+
+        div {
+            position: relative;
+            min-height: clamp(250px, 50vw, 350px);
+            border: solid 1px;
+
+            app-image{
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 100vw;
+                height: 100%;
+                max-width: 1200px;
+            }
+        }
+    }
+
+    main {
+        min-height: 400px;
+    }
+}

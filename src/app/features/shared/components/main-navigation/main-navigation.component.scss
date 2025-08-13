@@ -1,0 +1,23 @@
+@import "partial-styles/variables";
+
+:host {
+    display: flex;
+    justify-content: space-between;
+    min-height: 70px;
+
+    app-logo{
+        width: 40px;
+        align-self: center;
+    }
+
+    ul {
+        display: flex;
+        align-items: center;
+        gap: $medium_number;
+        list-style: none;
+
+        li{
+            font-size: $preferred_font_size;
+        }
+    }
+}

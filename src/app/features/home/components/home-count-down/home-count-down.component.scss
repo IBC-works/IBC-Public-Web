@@ -1,0 +1,47 @@
+@import "partial-styles/variables";
+
+:host {
+    display: grid;
+    grid-template-columns: 120px 20px 120px 20px 120px 20px 120px;
+    grid-auto-rows: 120px;
+    gap: $medium_number;
+
+    .time-unit {
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0px 0px 5px 2px transparentize($color: $black, $amount: .9);
+        color: $other_pallet_gray_blue;
+
+        h1{
+            font-size: $large_number * 2;
+        }
+
+        p{
+            text-transform: uppercase;
+        }
+    }
+
+    .colunm{
+        display: flex;
+        flex-flow: column;
+        justify-content: space-evenly;
+
+        span{
+            display: block;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background-color: darken($color: $white, $amount: 10);
+        }
+    }
+
+    @media (max-width: 700px) {
+        grid-template-columns: 120px 20px 120px;
+
+        .colunm.median{
+            display: none;
+        }
+    }
+}

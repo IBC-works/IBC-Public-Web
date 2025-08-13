@@ -1,0 +1,13 @@
+@import "partial-styles/font_variables";
+@import "partial-styles/variables";
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: $font;
+
+    body {
+        overflow-x: hidden;
+    }
+}

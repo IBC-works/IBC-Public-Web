@@ -1,0 +1,94 @@
+@import "partial-styles/variables";
+:host {
+    height: 350px;
+    display: flex;
+
+    app-swiper {
+        flex: 1;
+
+        section {
+            container-type: inline-size;
+            border-radius: $large_number;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            
+            .floor{
+                position: absolute;
+                display: flex;
+                inset: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 1;
+
+                app-image {
+                    flex: 1;
+                }
+            }
+
+            & > *:not(.floor){
+                z-index: 2;
+            }
+
+            .article-panel{
+                width: 90%;
+                display: flex;
+                height: max-content;
+                margin-bottom: $large_number * 2;
+                gap: $large_number;
+
+                @container (max-width: 500px){
+                    & > button {
+                        display: none;
+                    }
+                }
+
+                .article-body {
+                    position: relative;
+                    flex: 1;
+                    display: flex;
+                    flex-flow: column;
+                    gap: $small_number;
+                    border: solid 1px $white;
+                    background-color: transparentize($color: $white, $amount: .9);
+                    border-radius: $medium_number * 2;
+                    backdrop-filter: blur($small_number);
+                    min-height: 100px;
+                    padding: $large_number;
+                    color: $white;
+
+                    .label {
+                        position: absolute;
+                        top: -$medium_number;
+                        left: clamp($large_number, 20%, ($large_number * 2));
+                        background-color: $white;
+                        padding: 0 $medium_number;
+                        border-radius: $medium_number;
+                        color: $black;
+                    }
+
+                    p{
+                        font-size: $preferred_font_size;
+                    }
+                }
+
+                button {
+                    width: 60px;
+                    height: 60px;
+                    align-self: center;
+                    backdrop-filter: blur($small_number);
+                    background-color: transparentize($color: $white, $amount: .7);
+                    border-radius: 50%;
+                    border: none;
+                    outline: none;
+                    color: $white;
+                    font-size: $large_number;
+                    transform: rotate(-45deg);
+                    cursor: pointer;
+                }   
+            }
+        }
+    }
+}
