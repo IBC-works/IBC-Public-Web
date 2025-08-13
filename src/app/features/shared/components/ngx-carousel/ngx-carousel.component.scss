@@ -1,0 +1,13 @@
+:host{
+    position: relative;
+    overflow: hidden;
+
+    ngx-slick-carousel {
+        position: absolute;
+        inset: 0;
+
+        ngx-slide{
+            display: flex;
+        }
+    }
+}

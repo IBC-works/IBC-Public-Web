@@ -1,0 +1,38 @@
+@import "partial-styles/variables";
+
+:host {
+    display: flex;
+    flex-flow: column;
+    width: clamp(200px, 100%, 400px);
+    gap: $large_number;
+
+    p{
+        text-align: center;
+    }
+
+    div {
+        display: flex;
+        background-color: transparentize($color: $white, $amount: .7);
+        backdrop-filter: blur($small_number);
+        height: 50px;
+        border-radius: $large_number;
+        overflow: hidden;
+
+        input{
+            flex: 1;
+            margin-left: $large_number;
+            background-color: transparent;
+            outline: none;
+            border: none;
+        }
+
+        button{
+            width: 100px;
+            background-color: $gray;
+            color: $white;
+            outline: none;
+            border: none;
+            cursor: pointer;
+        }
+    }
+}

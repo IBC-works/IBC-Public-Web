@@ -6,6 +6,12 @@ import { SwiperContainer } from 'swiper/element';
 import { SwiperOptions, PaginationOptions } from 'swiper/types';
 import { observeResize } from '../../../../functions/observe-resize.func';
 import { setSizeToMatch } from '../../../../functions/set-size-to-match.func';
+import SwiperCore from 'swiper';
+import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+
+
+// ✅ Enable autoplay
+SwiperCore.use([Autoplay, Pagination, Navigation]);
 
 @Component({
   selector: 'app-swiper',
@@ -110,6 +116,8 @@ export class SwiperComponent implements OnInit, AfterViewInit, OnChanges, OnDest
     if(this.initializeed && this.swiper && this.options){
 
       Object.assign(this.swiper.params, this.options)
+
+      console.log(this.options)
 
       this.swiper.update()
     }

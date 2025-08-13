@@ -1,0 +1,24 @@
+<app-main-navigation></app-main-navigation>
+
+<header>
+    <h3>WE ARE COMING SOON</h3>
+
+    <app-count-down></app-count-down>
+
+    <app-news-letter></app-news-letter>
+</header>
+
+<main>
+    <p>ARTICLES</p>
+
+    <ul>
+        @for (item of Articles; track $index) {
+            <li (click)="GoTo(item)">
+                <div class="image-panel">
+                    <app-image [src]="item.image"></app-image>
+                </div>
+                <p>{{item.title}}</p>
+            </li>
+        }
+    </ul>
+</main>

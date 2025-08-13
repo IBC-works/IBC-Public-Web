@@ -1,6 +1,5 @@
-import { Component, inject, Inject } from '@angular/core';
+import { AfterViewInit, Component, inject, Inject } from '@angular/core';
 import { SwiperComponent } from "../../../shared/components/swiper/swiper.component";
-import { Articles } from '../../../../articles';
 import { SwiperOptions } from 'swiper/types';
 import { CommonModule } from '@angular/common';
 import { ImageComponent } from "../../../shared/components/image/image.component";
@@ -9,7 +8,9 @@ import { IconComponent } from "../../../shared/components/icon/icon.component";
 import { TextShortnerPipe } from '../../../shared/pipes/text-shortner.pipe';
 import { AppService } from '../../../../services/app.service';
 import { Article } from '../../../../entities/Article.entity';
-import { Router } from '@angular/router';
+import { ArticlesService } from '../../../shared/services/articles.service';
+import { JQuerySlickOptions } from 'ngx-slick-options';
+import { NGXCarouselComponent } from "../../../shared/components/ngx-carousel/ngx-carousel.component";
 
 @Component({
   selector: 'app-home-articles-view',
@@ -18,78 +19,98 @@ import { Router } from '@angular/router';
     SwiperComponent,
     ImageComponent,
     IconComponent,
-    TextShortnerPipe
+    TextShortnerPipe,
+    NGXCarouselComponent
 ],
   template: `
-    <app-swiper #mm [options]="CarouselOptions">
+    @if(IsDesktop) {
+      <app-swiper [options]="SwiperCarouselOptions">
+        @for (item of Articles; track $index) {
+          <ng-template #slideTempRef>
+            <section>
+              <div class="floor">
+                  <app-image [src]="item.image"></app-image>
+              </div>
 
-      @for (item of Articles; track $index) {
-        <ng-template #slideTempRef >
-          <section>
-            <div class="floor">
-                <app-image [src]="item.image"></app-image>
-            </div>
+              <div class="article-panel">
+                <div class="article-body" (click)="GoToArtile(item)">
+                  <div class="label">ARTICLE</div>
 
-            <div class="article-panel">
-              <div class="article-body" (click)="GoToArtile(item)">
-                <div class="label">ARTICLE</div>
-                
-                <h4>{{item.title}}</h4>
+                  <h4>{{item.title}}</h4>
 
-                <p>{{item.body | textShortner : 100}}</p>
-              </div>  
+                  <p>{{item.body | textShortner : 100}}</p>
+                </div>  
 
-              <button (click)="GoToArtile(item)">
-                <app-icon name="arrow-right"></app-icon>
-              </button>
-            </div>
-          </section>
-        </ng-template>
-      }
+                <button (click)="GoToArtile(item)">
+                  <app-icon name="arrow-right"></app-icon>
+                </button>
+              </div>
+            </section>
+          </ng-template>
+        }
+      </app-swiper>
+    }@else {
+      <app-ngx-carousel [options]="NgxSlickCarouselOptions">
+        @for (item of Articles; track $index) {
+          <ng-template #ngxSlideItem>
+            <section #ngxSlideInst>
+              <div class="floor">
+                  <app-image [src]="item.image"></app-image>
+              </div>
 
-    </app-swiper>
+              <div class="article-panel">
+                <div class="article-body" (click)="GoToArtile(item)">
+                  <div class="label">ARTICLE</div>
+
+                  <h4>{{item.title}}</h4>
+
+                  <p>{{item.body | textShortner : 100}}</p>
+                </div>  
+
+                <button (click)="GoToArtile(item)">
+                  <app-icon name="arrow-right"></app-icon>
+                </button>
+              </div>
+            </section>
+          </ng-template>
+        }
+      </app-ngx-carousel>
+    }
   `,
   styleUrl: './home-articles-view.component.scss'
 })
-export class HomeArticlesViewComponent {
+export class HomeArticlesViewComponent implements AfterViewInit {
   private appService = inject(AppService)
 
-  private router = inject(Router)
+  private articlesService = inject(ArticlesService)
 
   Articles: Article[] = []
 
-  CarouselOptions!: SwiperOptions
+  SwiperCarouselOptions: SwiperOptions = {
+    spaceBetween: 20,
+    slidesPerView: 1.25
+  }
+
+  NgxSlickCarouselOptions: JQuerySlickOptions = {
+    autoplay: true,
+    autoplaySpeed: 5000
+  }
+
+  get IsDesktop () {
+    return this.appService.isDesktopView
+  }
 
   constructor (
     @Inject(APP_GENERAL_IMAGE_CONFIGURATION) public AppImages: {[key: string]: string}
   ){
-    if(this.appService.isDesktopView) {
-      this.CarouselOptions = {
-        spaceBetween: 20,
-        slidesPerView: 1.25
-      }
-    }else {
-      this.CarouselOptions = {
-        spaceBetween: 20,
-        slidesPerView: 1
-      }
-    }
+    this.Articles = this.articlesService.Articles
+  }
 
-    this.Articles = Articles.map(article => {
-      function rand (nums: number[]) {
-        return Math.floor(Math.random() * nums.length)
-      }
+  ngAfterViewInit(): void {
 
-      return {
-        ...article,
-        image: this.AppImages['dummy_' + rand([0,1, 2])]
-      }
-    })
   }
 
   GoToArtile(article: Article) {
-    sessionStorage.setItem("article", JSON.stringify(article))
-
-    this.router.navigate(['article'])
+    this.articlesService.goToArticle(article)
   }
 }

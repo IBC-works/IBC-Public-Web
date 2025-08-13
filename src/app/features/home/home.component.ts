@@ -3,7 +3,8 @@ import { MainNavigationComponent } from "../shared/components/main-navigation/ma
 import { CommonModule } from '@angular/common';
 import { HomeArticlesViewComponent } from "./components/home-articles-view/home-articles-view.component";
 import { APP_GENERAL_IMAGE_CONFIGURATION } from '../shared/config/app-image-configuration.config';
-import { HomeCountDownComponent } from "./components/home-count-down/home-count-down.component";
+import { CountDownComponent } from "../shared/components/count-down/count-down.component";
+import { NewsLetterComponent } from "../shared/components/news-letter/news-letter.component";
 
 @Component({
   selector: 'app-home',
@@ -11,7 +12,8 @@ import { HomeCountDownComponent } from "./components/home-count-down/home-count-
     CommonModule,
     MainNavigationComponent,
     HomeArticlesViewComponent,
-    HomeCountDownComponent
+    CountDownComponent,
+    NewsLetterComponent
 ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'

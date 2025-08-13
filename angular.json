@@ -34,11 +34,15 @@
             "styles": [
               "src/styles.scss",
               "node_modules/swiper/swiper-bundle.min.css",
+              "node_modules/slick-carousel/slick/slick.css",
+              "node_modules/slick-carousel/slick/slick-theme.css",
               "src/icon-plugins/all.min.css"
 
             ],
             "scripts": [
-              "src/icon-plugins/all.min.js"
+              "src/icon-plugins/all.min.js",
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/slick-carousel/slick/slick.min.js"
             ],
             "stylePreprocessorOptions": {
               "includePaths": [

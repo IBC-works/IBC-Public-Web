@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { interval, Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-home-count-down',
+  selector: 'app-count-down',
   imports: [],
   template: `
       <div class="time-unit">
@@ -40,9 +40,9 @@ import { interval, Subscription } from 'rxjs';
         <p>Seconds</p>
       </div>
   `,
-  styleUrl: './home-count-down.component.scss'
+  styleUrl: './count-down.component.scss'
 })
-export class HomeCountDownComponent implements OnInit, OnDestroy {
+export class CountDownComponent implements OnInit, OnDestroy {
   private LauanchDateTime = new Date(2026,0,1).getTime()
 
   private CurrentDate = new Date()
